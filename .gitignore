@@ -1,0 +1,4 @@
+node_modules
+.env
+conifg/database
+package-lock.json
