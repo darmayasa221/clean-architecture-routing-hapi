@@ -5,10 +5,10 @@ describe('AlbumRepository', () => {
     // Arrange
     const albumRepository = new AlbumRepository();
     // Action and Arrange
-    expect(albumRepository.addAlbum({})).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    expect(albumRepository.getAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    expect(albumRepository.editAlbumById({})).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    expect(albumRepository.deleteAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    expect(albumRepository.checkAvailableAlbumId('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPELMENTED');
+    await expect(albumRepository.addAlbum({})).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(albumRepository.getAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(albumRepository.editAlbumById({})).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(albumRepository.deleteAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(albumRepository.checkAvailableAlbumId('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPELMENTED');
   });
 });
