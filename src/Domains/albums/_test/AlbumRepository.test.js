@@ -9,5 +9,6 @@ describe('AlbumRepository', () => {
     expect(albumRepository.getAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     expect(albumRepository.editAlbumById({})).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     expect(albumRepository.deleteAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    expect(albumRepository.checkAvailableAlbumId('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPELMENTED');
   });
 });
