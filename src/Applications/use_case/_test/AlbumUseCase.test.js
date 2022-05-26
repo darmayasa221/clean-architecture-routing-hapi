@@ -78,8 +78,8 @@ describe('AlbumUseCase', () => {
       expect(getedAlbum).toStrictEqual(expectedGetedAlbum);
     });
   });
-  describe('editAlbum', () => {
-    it('should orchestrating editAlbum correctly', async () => {
+  describe('editAlbumById', () => {
+    it('should orchestrating editAlbumByid correctly', async () => {
       // Arrange
       const useCasePayload = {
         albumId: 'album-0001',

@@ -10,5 +10,6 @@ describe('SongRepository', () => {
     await expect(songRepository.getSongById('')).rejects.toThrowError('SONG_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     await expect(songRepository.editSongById({})).rejects.toThrowError('SONG_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     await expect(songRepository.deleteSongById('')).rejects.toThrowError('SONG_REPOSITORY.METHOD_NOT_IMPLEMENTED');
+    await expect(songRepository.checkAvailableSongId('')).rejects.toThrowError('SONG_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   });
 });
