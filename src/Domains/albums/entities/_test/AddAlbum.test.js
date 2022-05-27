@@ -26,11 +26,11 @@ describe('AddAlbum entities', () => {
     };
     // Action
     const {
-      username,
+      name,
       year,
     } = new AddAlbum(payload);
     // Assert
-    expect(username).toEqual(payload.name);
+    expect(name).toEqual(payload.name);
     expect(year).toEqual(payload.year);
   });
 });
