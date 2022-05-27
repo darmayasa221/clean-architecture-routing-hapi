@@ -9,6 +9,6 @@ describe('AlbumRepository', () => {
     await expect(albumRepository.getAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     await expect(albumRepository.editAlbumById({})).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
     await expect(albumRepository.deleteAlbumById('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
-    await expect(albumRepository.checkAvailableAlbumId('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPELMENTED');
+    await expect(albumRepository.checkAvailableAlbumId('')).rejects.toThrowError('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
   });
 });
