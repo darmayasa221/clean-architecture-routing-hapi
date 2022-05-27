@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 class AlbumRepository {
   async addAlbum(payload) {
     throw new Error('ALBUM_REPOSITORY.METHOD_NOT_IMPLEMENTED');
