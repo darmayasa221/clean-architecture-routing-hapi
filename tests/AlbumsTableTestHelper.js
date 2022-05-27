@@ -1,6 +1,6 @@
+/* istanbul ignore file */
 const pool = require('../src/Infrastructures/database/postgres/pool');
 
-/* istanbul igonore file */
 const AlbumsTableTestHelper = {
   async addAlbum({
     id = 'album-0001',
