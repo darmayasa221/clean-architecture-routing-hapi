@@ -12,4 +12,14 @@ describe('DomainErrorTranslator', () => {
     expect(DomainErrorTranslator.translate(new Error('ADD_SONG.NOT_MEET_DATA_TYPE_SPECIFICATION')))
       .toStrictEqual(new InvariantError('Failed To Add Song Because The Data Not Meet Specification Type!'));
   });
+  it('should return original error when error message is not needed to translate', () => {
+    // Arrange
+    const error = new Error('some_error_message');
+
+    // Action
+    const translatedError = DomainErrorTranslator.translate(error);
+
+    // Assert
+    expect(translatedError).toStrictEqual(error);
+  });
 });
