@@ -24,6 +24,6 @@ describe('VerifyParamsSong', () => {
     const result = new VerifyParamsSong(params);
     // Assert
     expect(result).toHaveProperty('id');
-    expect(result.id).toEqual(params.id);
+    expect(result.id).toEqual(params.songId);
   });
 });

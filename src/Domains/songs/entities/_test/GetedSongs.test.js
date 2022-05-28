@@ -50,12 +50,12 @@ describe('GetedSongs', () => {
       },
     ];
     // Action
-    const results = new GetedSongs(payload);
+    const { songs } = new GetedSongs(payload);
     // Assert
-    expect(Array.isArray(results)).toBeTruthy();
-    expect(results.length).toHaveLength(1);
-    expect(results[0].id).toEqual(payload[0].id);
-    expect(results[0].title).toEqual(payload[0].title);
-    expect(results[0].performer).toEqual(payload[0].performer);
+    expect(Array.isArray(songs)).toBeTruthy();
+    expect(songs).toHaveLength(1);
+    expect(songs[0].id).toEqual(payload[0].id);
+    expect(songs[0].title).toEqual(payload[0].title);
+    expect(songs[0].performer).toEqual(payload[0].performer);
   });
 });
