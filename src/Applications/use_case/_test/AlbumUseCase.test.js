@@ -11,7 +11,7 @@ describe('AlbumUseCase', () => {
       // Arrange
       const useCasePayload = {
         name: 'album-name',
-        year: '1234',
+        year: 1234,
       };
       const expectedAddedAlbum = new AddedAlbum({
         id: 'album-0001',
@@ -100,7 +100,7 @@ describe('AlbumUseCase', () => {
         albumRepository: mockAlbumRepository,
       });
       // Action
-      await albumUseCase.editAlbumByid(useCasePayload);
+      await albumUseCase.editAlbumById(useCasePayload);
       // Assert
       expect(verifiedUseCaseParamsPayload).toHaveProperty('id');
       expect(verifiedUseCaseParamsPayload.id).toEqual(useCasePayload.albumId);
@@ -111,7 +111,7 @@ describe('AlbumUseCase', () => {
         ...new VerifyParamsAlbum({
           albumId: useCasePayload.albumId,
         }),
-        ...new AddedAlbum({
+        ...new AddAlbum({
           name: useCasePayload.name,
           year: useCasePayload.year,
         }),

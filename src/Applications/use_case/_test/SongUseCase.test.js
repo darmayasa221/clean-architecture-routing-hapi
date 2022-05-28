@@ -48,7 +48,7 @@ describe('SongUseCase', () => {
   describe('getSongs', () => {
     it('should orchestrating the getSongs correctly', async () => {
       // Arrange
-      const expectedSongsGet = new GetedSongs([{
+      const { songs: expectedSongsGet } = new GetedSongs([{
         id: 'song-0001',
         title: 'title-test',
         performer: 'performer-test',
@@ -56,11 +56,7 @@ describe('SongUseCase', () => {
       const mockSongRepository = new SongRepository();
       /** mocking needed function */
       mockSongRepository.getSongs = jest.fn()
-        .mockImplementation(() => Promise.resolve(new GetedSongs([{
-          id: 'song-0001',
-          title: 'title-test',
-          performer: 'performer-test',
-        }])));
+        .mockImplementation(() => Promise.resolve(expectedSongsGet));
       /** create use case instance */
       const songUseCase = new SongUseCase({
         songRepository: mockSongRepository,
@@ -89,24 +85,24 @@ describe('SongUseCase', () => {
         genre: 'genre-test',
         performer: 'performer-test',
         duration: 201,
-        albumId: 'album-0001',
+        album_id: 'album-0001',
       });
       const mockSongRepository = new SongRepository();
       /** mocking needed functiong */
       mockSongRepository.checkAvailableSongId = jest.fn()
-        .mockImplementation(() => Promise.resolve(new GetedSong({
+        .mockImplementation(() => Promise.resolve(new VerifyParamsSong({
           songId: useCasePayload.songId,
         })));
       mockSongRepository.getSongById = jest.fn()
-        .mockImplementation(() => Promise.resolve(new GetedSong({
+        .mockImplementation(() => Promise.resolve({
           id: useCasePayload.songId,
           title: 'title-test',
           year: 2000,
           genre: 'genre-test',
           performer: 'performer-test',
           duration: 201,
-          albumId: 'album-0001',
-        })));
+          album_id: 'album-0001',
+        }));
       /** create use case instance */
       const songUseCase = new SongUseCase({
         songRepository: mockSongRepository,
@@ -116,9 +112,11 @@ describe('SongUseCase', () => {
       // Assert
       expect(verifiedUseCasePayload).toHaveProperty('id');
       expect(verifiedUseCasePayload.id).toEqual(useCasePayload.songId);
-      expect(mockSongRepository.checkAvailableSongId).toBeCalledWith(useCasePayload.songId);
+      expect(mockSongRepository.checkAvailableSongId).toBeCalledWith(new VerifyParamsSong({
+        songId: useCasePayload.songId,
+      }));
       expect(mockSongRepository.getSongById).toBeCalledWith(new VerifyParamsSong({
-        id: useCasePayload.songId,
+        songId: useCasePayload.songId,
       }));
       expect(song).toStrictEqual(expectedSong);
     });
