@@ -46,7 +46,7 @@ describe('AlbumRepositoryPostgres', () => {
       await AlbumsTableTestHelper.addAlbum({ id });
       const albumRepositoryPostgres = new AlbumRepositoryPostgres(pool, {});
       // Action
-      const album = await albumRepositoryPostgres.getAlbumById(id);
+      const album = await albumRepositoryPostgres.getAlbumById({ id });
       // Assert
       expect(album).toHaveLength(1);
     });
@@ -66,7 +66,7 @@ describe('AlbumRepositoryPostgres', () => {
       await albumRepositoryPostgres.editAlbumById(editAlbum);
       // Assert
       const editedAlbum = await AlbumsTableTestHelper.findAlbum(id);
-      expect(editedAlbum).toStrictEqual(editAlbum);
+      expect(editedAlbum[0]).toStrictEqual(editAlbum);
     });
   });
   describe('deleteAlbumById', () => {
@@ -76,7 +76,7 @@ describe('AlbumRepositoryPostgres', () => {
       await AlbumsTableTestHelper.addAlbum({ id });
       const albumRepositoryPostgres = new AlbumRepositoryPostgres(pool, {});
       // Action
-      await albumRepositoryPostgres.deleteAlbumById(id);
+      await albumRepositoryPostgres.deleteAlbumById({ id });
       // Assert
       const album = await AlbumsTableTestHelper.findAlbum(id);
       expect(album).toHaveLength(0);
@@ -88,7 +88,7 @@ describe('AlbumRepositoryPostgres', () => {
       const id = 'album-0001';
       const albumRepositoryPostgres = new AlbumRepositoryPostgres(pool, {});
       // Action and Assert
-      await expect(albumRepositoryPostgres.checkAvailableAlbumId(id))
+      await expect(albumRepositoryPostgres.checkAvailableAlbumId({ id }))
         .rejects.toThrowError(NotFoundError);
     });
     it('should not throw error when id available', async () => {
@@ -97,7 +97,7 @@ describe('AlbumRepositoryPostgres', () => {
       await AlbumsTableTestHelper.addAlbum({ id });
       const albumRepositoryPostgres = new AlbumRepositoryPostgres(pool, {});
       // Action and Assert
-      await expect(albumRepositoryPostgres.checkAvailableAlbumId(id))
+      await expect(albumRepositoryPostgres.checkAvailableAlbumId({ id }))
         .resolves.not.toThrowError(NotFoundError);
     });
   });

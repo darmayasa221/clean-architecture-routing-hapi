@@ -3,6 +3,7 @@ const SongsTableTestHelper = require('../../../../tests/SongsTableTestHelper');
 const SongRepositoryPostgres = require('../SongRepositoryPostgres');
 const AddSong = require('../../../Domains/songs/entities/AddSong');
 const NotFoundError = require('../../../Commons/exceptions/NotFoundError');
+const AlbumsTableTestHelper = require('../../../../tests/AlbumsTableTestHelper');
 
 describe('SongRepositoryPostgres', () => {
   afterAll(async () => {
@@ -14,6 +15,7 @@ describe('SongRepositoryPostgres', () => {
   describe('addSong', () => {
     it('should persist addSong', async () => {
       // Arrange
+      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
       const addSong = new AddSong({
         title: 'title-test',
         year: 1234,
@@ -32,6 +34,7 @@ describe('SongRepositoryPostgres', () => {
     });
     it('should return addSong correctly', async () => {
       // Arrange
+      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
       const addSong = new AddSong({
         title: 'title-test',
         year: 1234,
@@ -52,6 +55,7 @@ describe('SongRepositoryPostgres', () => {
   describe('getSongs', () => {
     it('should retrun songs correctly', async () => {
       // Arrange
+      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
       await SongsTableTestHelper.addSong({ id: 'song-0001' });
       const songRepositoryPostgres = new SongRepositoryPostgres(pool, {});
       // Action
@@ -63,11 +67,12 @@ describe('SongRepositoryPostgres', () => {
   describe('getSongById', () => {
     it('should return song correctly', async () => {
       // Arrange
+      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
       const id = 'song-0001';
       await SongsTableTestHelper.addSong({ id });
       const songRepositoryPostgres = new SongRepositoryPostgres(pool, {});
       // Action
-      const song = await songRepositoryPostgres.getSongById(id);
+      const song = await songRepositoryPostgres.getSongById({ id });
       // Arrange
       expect(song).toHaveLength(1);
     });
@@ -75,6 +80,7 @@ describe('SongRepositoryPostgres', () => {
   describe('editSongById', () => {
     it('should persist editSongById', async () => {
       // Arrange
+      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
       const id = 'song-0001';
       await SongsTableTestHelper.addSong({ id });
       const editSongPayload = {
@@ -100,10 +106,11 @@ describe('SongRepositoryPostgres', () => {
     it('should persist deleteSongById ', async () => {
       // Arrange
       const id = 'song-0001';
+      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
       await SongsTableTestHelper.addSong({ id });
       const songRepositoryPostgres = new SongRepositoryPostgres(pool, {});
       // Action
-      await songRepositoryPostgres.deleteSongById(id);
+      await songRepositoryPostgres.deleteSongById({ id });
       // Arrange
       const song = await SongsTableTestHelper.findSong();
       expect(song).toHaveLength(0);
@@ -115,16 +122,17 @@ describe('SongRepositoryPostgres', () => {
       const id = 'song-0001';
       const songRepositoryPostgres = new SongRepositoryPostgres(pool, {});
       // Action and Assert
-      await expect(songRepositoryPostgres.checkAvailableSongId(id))
+      await expect(songRepositoryPostgres.checkAvailableSongId({ id }))
         .rejects.toThrowError(NotFoundError);
     });
     it('should not throw error when id available', async () => {
       // Arrange
+      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
       const id = 'song-0001';
       await SongsTableTestHelper.addSong({ id });
       const songRepositoryPostgres = new SongRepositoryPostgres(pool, {});
       // Action and Assert
-      await expect(songRepositoryPostgres.checkAvailableSongId(id))
+      await expect(songRepositoryPostgres.checkAvailableSongId({ id }))
         .resolves.not.toThrowError(NotFoundError);
     });
   });
