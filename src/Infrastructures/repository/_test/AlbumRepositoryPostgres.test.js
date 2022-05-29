@@ -48,7 +48,7 @@ describe('AlbumRepositoryPostgres', () => {
       // Action
       const album = await albumRepositoryPostgres.getAlbumById({ id });
       // Assert
-      expect(album).toHaveLength(1);
+      expect([album]).toHaveLength(1);
     });
   });
   describe('editAlbumById', () => {

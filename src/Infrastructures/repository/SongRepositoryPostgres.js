@@ -29,7 +29,7 @@ class SongRepositoryPostgres extends SongRepository {
   }
 
   async getSongs() {
-    const query = 'SELECT * FROM songs';
+    const query = 'SELECT id, title, performer FROM songs';
     const { rows } = await this._pool.query(query);
     return rows;
   }
@@ -41,7 +41,7 @@ class SongRepositoryPostgres extends SongRepository {
       values: [id],
     };
     const { rows } = await this._pool.query(query);
-    return rows;
+    return rows[0];
   }
 
   async editSongById({

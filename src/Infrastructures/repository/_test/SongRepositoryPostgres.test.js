@@ -55,8 +55,10 @@ describe('SongRepositoryPostgres', () => {
   describe('getSongs', () => {
     it('should retrun songs correctly', async () => {
       // Arrange
-      await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' });
-      await SongsTableTestHelper.addSong({ id: 'song-0001' });
+      Promise.all(
+        await AlbumsTableTestHelper.addAlbum({ id: 'album-0001' }),
+        await SongsTableTestHelper.addSong({ id: 'song-0001' }),
+      );
       const songRepositoryPostgres = new SongRepositoryPostgres(pool, {});
       // Action
       const songs = await songRepositoryPostgres.getSongs();
@@ -74,7 +76,7 @@ describe('SongRepositoryPostgres', () => {
       // Action
       const song = await songRepositoryPostgres.getSongById({ id });
       // Arrange
-      expect(song).toHaveLength(1);
+      expect([song]).toHaveLength(1);
     });
   });
   describe('editSongById', () => {

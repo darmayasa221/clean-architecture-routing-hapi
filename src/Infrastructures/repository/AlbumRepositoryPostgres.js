@@ -29,7 +29,7 @@ class AlbumRepositoryPostgres extends AlbumRepository {
       values: [id],
     };
     const { rows } = await this._pool.query(query);
-    return rows;
+    return rows[0];
   }
 
   async editAlbumById({
