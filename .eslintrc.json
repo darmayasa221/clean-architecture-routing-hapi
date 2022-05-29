@@ -12,5 +12,8 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-underscore-dangle":"off",
+        "camelcase": "off",
+        "class-methods-use-this" : "off"
     }
 }
